@@ -1,38 +1,251 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: Raleway;
+  src: url('/public/Fonts/Raleway-Regular.ttf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: Neon;
+  src: url('/public/Fonts/TiltNeon-Regular.ttf');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-family: Raleway;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.background {
+  background-image: url("/public/Img/background.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+
+.site-layout{
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  background-color: #00000000;
+}
+
+.header_c, .footer_c{
+  background-color: #00000000;
+  backdrop-filter: blur(4px);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.container{
+  background-color: #00000000;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Login {
+  width: 400px;
+  height: 480px;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 0 0 10px;
+  padding: 40px 40px;
+  /* backdrop-filter: blur(2px); */
+  background-color: #00000070;
+  border: 2px solid;
+}
+
+.Login label{
+  text-align: left;
+  display:block;
+  font-weight: bold;
+}
+
+.card_cont{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  height: 80%;
+  width: 500px;
+  padding: 0px 40px;
+  gap: 40px;
+}
+
+.Login h2{
+  font-size: 40px;
+  color: #00d9ff;
+  margin-bottom: 30px;
+  font-family: Neon;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+}
+
+.Login input, .Login textarea, .Login select {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 10px 0;
+  border: 2px solid rgb(4, 0, 35);
+  box-sizing: border-box;
+  display: block;
+  border-radius: 10px;
+  background-color: #00000080;
+  outline: none;
+  color: #00d9ff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.Login button{
+  background-color: #00000070;
+  color:#00d9ff;
+  border: 0;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+  margin-top: 30px;
+  border: 2px solid;
+}
+
+.Login button:hover{
+  background: #00d9ff;
+  color:rgb(0, 0, 40);
+  box-shadow: 0 0 10px #131327;
+}
+
+.error_text{
+color: #ff2054;
+font-weight: bold;
+text-shadow: 0 0 7px #ff0000;
+}
+
+.footer_txt{
+  text-align: center;
+  font-family: Neon;
+  font-weight: bold;
+  font-size: 16px;
+  color: #00d9ff;
+}
+
+.login_txt{
+  color: #00d9ff;
+  text-shadow: 0 0 5px black;
+}
+
+.card{
+  height: 100%;
+  width: 100%;
+  background-color: #00000044;
+  border-radius: 20px;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+  backdrop-filter: blur(5px);
+}
+
+.c1{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/CR-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c2{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/mn-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c3{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/IS-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c4{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/ISBM-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c5{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/SI-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c6{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/TI-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c7{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/MI-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.c8{
+  height: 50%;
+  width: 50%;
+  background-image: url("/public/Img/rm-80x80.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.card:hover{
+  cursor: pointer;
+  scale: 1.1 1.1;
+  box-shadow: 0 0 20px #00d9ff;
+}
+
+.textShow{
+padding: 15px;
+background-color: #131327;
+text-align: center;
+font-family: Neon;
+font-weight: bold;
+font-size: 16px;
+color: #00d9ff;
+width: 100%;
+position: absolute;
+margin-top: 300px;
+transition: all 0.5s ease-in-out;
+}
+
+.card:hover .textShow{ 
+  margin-top: 160px;
+}
+
+.logmen{
+  width: 60%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px #00d9ff;
+  border-radius: 15px;
+  background-color: #7faeff7e;
 }
