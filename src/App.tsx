@@ -1,107 +1,76 @@
 import React, { useState } from 'react';
-
+import { useStore } from './LocalStore';
 import './App.css';
-import Login from './Login';
 
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+function MyComponent() {
+    const store = useStore();
 
-const { Header, Content, Footer, Sider } = Layout;
+    const [localData, setLocalData] = useState<any>({ model: '', color: '', price: '', year: '' });
 
-type MenuItem = Required<MenuProps>['items'][number];
+    const myData = store.myData;
 
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
+    const handleAddObject = (event: React.FormEvent<HTMLFormElement>) => {
+
+        event.preventDefault();
+        if (!localData.model || !localData.color || !localData.price || !localData.year) {
+            alert('Complete all fields!');
+            return;
+        }
+        store.addObject(localData);
+        setLocalData({ model: '', color: '', price: '', year: '' });
+    };
+
+    const handleDeleteObject = (index: number) => {
+        store.deleteObject(index);
+        setLocalData({ model: '', color: '', price: '', year: '' });
+    };
+
+
+    return (
+        <div className="container">
+            <div className='start_img'>
+                <form className="form" onSubmit={handleAddObject}>
+                    <span className='title'>Car Library</span>
+                    <div className='inp_cont'>
+                        <span className='inp_txt'>Car Model: </span>
+                        <input className="input" type="text" placeholder="Model" value={localData.model} onChange={e => setLocalData({ ...localData, model: e.target.value })} />
+                    </div>
+                    <div className='inp_cont'>
+                        <span className='inp_txt'>Car Color: </span>             
+                        <input className="input" type="text" placeholder="Color" value={localData.color} onChange={e => setLocalData({ ...localData, color: e.target.value })} />
+                    </div>
+                    <div className='inp_cont'>
+                        <span className='inp_txt'>Car Price: </span>  
+                        <input className="input" type="text" placeholder="Price" value={localData.price} onChange={e => setLocalData({ ...localData, price: e.target.value })} />
+                    </div>
+                    <div className='inp_cont'>
+                        <span className='inp_txt'>Year of Production: </span>  
+                        <input className="input" type="text" placeholder="Year" value={localData.year} onChange={e => setLocalData({ ...localData, year: e.target.value })} />
+                    </div>
+                    <button className="button" type="submit">Register</button>
+                </form>
+                <div className="card_cont">
+                    {myData.map((data: any, index: number) => (
+                        <div key={index} className="card">
+                            <div className='card_ins'>
+                                <span className='names'>Model: </span><span className='second'>{data.model}</span>
+                            </div>
+                            <div className='card_ins'>
+                            <span className='names'>Color: </span><span className='second'>{data.color}</span>
+                            </div>
+                            <div className='card_ins'>
+                            <span className='names'>Price: </span><span className='second'>{data.price} €</span>
+                            </div>
+                            <div className='card_ins'>
+                            <span className='names'>Year: </span><span className='second'>{data.year}</span>
+                            </div>
+                            <button className="button2" onClick={() => handleDeleteObject(index)}>Delete</button>
+                        </div>
+                    ))}
+                </div>
+            </div>     
+        </div>
+    );
 }
 
-const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-];
-
-const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
-  return (
-    <div className='background'>
-    <Layout className="site-layout">
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
-      <Layout className="site-layout">
-        <Header className="header_c" />
-          <div className="container">
-            <div className="card_cont">
-              <div className='card'>
-                <div className='c1'></div>
-                <div className='textShow'>Calculatoare și Rețele</div>
-              </div>
-              <div className='card'>
-                <div className='c2'></div>
-                <div className='textShow'>Microelectronică</div>
-              </div>
-              <div className='card'>
-                <div className='c3'></div>
-                <div className='textShow'>Ingineria Software</div>
-              </div>
-              <div className='card'>
-                <div className='c4'></div>
-                <div className='textShow'>Ingineria Biomedicală</div>
-              </div>
-            </div>
-            <Login/> 
-            <div className="card_cont">
-            <div className='card'>
-                <div className='c5'></div>
-                <div className='textShow'>Securitatea Informațională</div>
-              </div>
-              <div className='card'>
-                <div className='c6'></div>
-                <div className='textShow'>Tehnologia Informației</div>
-              </div>
-              <div className='card'>
-                <div className='c7'></div>
-                <div className='textShow'>Managementul Informației</div>
-              </div>
-              <div className='card'>
-                <div className='c8'></div>
-                <div className='textShow'>Robotică și Mecanotronică</div>
-              </div>
-            </div> 
-          </div>
-        <Footer className='footer_c'><span className='footer_txt'>Shadow Design ©2023 Created by Lai Cristian</span></Footer>
-      </Layout>
-    </Layout>
-    </div>
-  );
-};
-
-export default App;
+export default MyComponent;
