@@ -1,21 +1,17 @@
 import { createContext, useContext } from 'react';
 import { observable, action } from 'mobx';
 
+export interface User {
+  username: string;
+  password: string;
+}
+
 export class LocalStore {
-    @observable myData: any = [];
-
-    @action setMyData(data: any) {
-        this.myData = data;
-    }
-
-    @action addObject(data: any) {
-        this.myData.push(data);
-    }
-
-
-    @action deleteObject(index: number) {
-        this.myData.splice(index, 1);
-    }
+  @observable users: User[] = [
+    { username: 'Cristi', password: '1111' },
+    { username: 'utm', password: '2222' },
+    { username: 'web', password: '3333' },
+  ];
 }
 
 const StoreContext = createContext(new LocalStore());
